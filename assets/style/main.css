@@ -373,7 +373,7 @@ ul {
 
 .landing-content-text span {
   font-size: 16px;
-  color: rgb(var(--theme-color));
+  color: #fff;
 }
 
 .main {
