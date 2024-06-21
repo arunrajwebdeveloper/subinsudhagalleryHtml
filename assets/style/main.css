@@ -373,7 +373,7 @@ ul {
 
 .landing-content-text span {
   font-size: 16px;
-  color: #fff;
+  color: rgb(var(--theme-color));
 }
 
 .main {
@@ -401,13 +401,27 @@ ul {
   overflow: hidden;
   border-radius: 5px;
 }
+.landing-showcase .showcase-list a span {
+  color: #fff;
+  font-size: 11px;
+  margin: auto;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 4px 12px;
+}
 .landing-showcase .showcase-list a::after {
   content: "";
   background-color: rgba(var(--theme-color), 0.5);
-  background-image: url("../images/eye.svg");
+  /* background-image: url("../images/eye.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 38px;
+  background-size: 38px; */
   opacity: 0;
   display: flex;
   align-items: center;
@@ -420,13 +434,13 @@ ul {
   z-index: 1;
   transition: 0.2s ease-in-out;
 }
-.landing-showcase .showcase-list a::after {
+/* .landing-showcase .showcase-list a::after {
   transform: scale(0.9);
-}
+} */
 
 .landing-showcase .showcase-list a:hover::after {
   opacity: 1;
-  transform: scale(1);
+  /* transform: scale(1); */
 }
 
 .landing-showcase .showcase-list img {
@@ -846,9 +860,95 @@ ul {
   z-index: 1;
 }
 
+/* SOUNDS */
+
+.sounds-list {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.sounds-list .sound-item {
+  width: calc(50% - 15px);
+}
+.sounds-list .sound-item .album-cover {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sounds-list .sound-item .sound-thumbnail {
+  max-width: 100%;
+  vertical-align: middle;
+}
+.sounds-list .sound-item-content .item-title {
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 5px;
+  line-height: normal;
+}
+.sounds-list .sound-item-content .item-subtext {
+  font-size: 10px;
+  color: #666;
+  line-height: normal;
+  display: block;
+}
+.sounds-list .sound-item .controls {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.sounds-list .sound-item .sound-control-btn {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.sounds-list .sound-item .sound-control-btn.play {
+  background-image: url("../images/icons/play-button.svg");
+}
+.sounds-list .sound-item .sound-control-btn.pause {
+  background-image: url("../images/icons/pause-button.svg");
+}
+
+.sounds-list .sound-item .controls .sound-control-btn.pause,
+.sounds-list .sound-item .controls:hover .sound-control-btn {
+  background-color: rgba(16, 71, 237, 0.386);
+}
+
+.sounds-list .sound-item .sound-item-content {
+  margin-top: 10px;
+}
+
 /* RESPONSIVE */
 
+@media screen and (max-width: 767px) {
+  .sounds-list .sound-item .sound-item-content .sound-player {
+    display: none !important;
+  }
+  .sounds-list {
+    padding-left: 15px;
+  }
+}
+
 @media screen and (min-width: 554px) {
+  .landing-showcase .showcase-list a span {
+    font-size: 18px;
+  }
   .content-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -937,6 +1037,36 @@ ul {
   }
   .grid-item .tags .tag {
     font-size: 14px;
+  }
+
+  .sounds-list {
+    gap: 30px;
+  }
+  .sounds-list .sound-item {
+    width: 100%;
+  }
+
+  .sounds-list .sound-item .sound-item-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+  .sounds-list .sound-item .album-cover {
+    max-width: 130px;
+  }
+  .sounds-list .sound-item .sound-item-content {
+    margin-top: 0;
+    width: calc(100% - 130px);
+  }
+  .sounds-list .sound-item .sound-player {
+    margin-bottom: 15px;
+  }
+  .sounds-list .sound-item-content .item-title {
+    font-size: 18px;
+  }
+  .sounds-list .sound-item-content .item-subtext {
+    font-size: 12px;
   }
 }
 @media screen and (min-width: 992px) {
