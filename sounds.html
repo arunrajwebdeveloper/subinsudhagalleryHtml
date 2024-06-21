@@ -390,61 +390,61 @@
       }
 
       // Initialize WaveSurfer instances for each audio file on page load
-      // window.location.origin
-      window.addEventListener("load", function () {
-        // const waveforms = {
-        //   waveform1: createWaveSurfer(
-        //     "waveform1",
-        //     "assets/sounds/mixkit-gimme-that-groove-872.mp3"
-        //   ),
-        //   waveform2: createWaveSurfer(
-        //     "waveform2",
-        //     "assets/sounds/mixkit-happy-and-all-that-514.mp3"
-        //   ),
-        //   waveform3: createWaveSurfer(
-        //     "waveform3",
-        //     "assets/sounds/mixkit-babe-783.mp3"
-        //   ),
-        //   waveform4: createWaveSurfer(
-        //     "waveform4",
-        //     "assets/sounds/mixkit-epic-games-76.mp3"
-        //   ),
-        //   waveform5: createWaveSurfer(
-        //     "waveform5",
-        //     "assets/sounds/mixkit-hip-hop-03-739.mp3"
-        //   ),
-        //   waveform6: createWaveSurfer(
-        //     "waveform6",
-        //     "assets/sounds/mixkit-smooth-jazz-640.mp3"
-        //   ),
-        // };
 
+      window.addEventListener("load", function () {
         const waveforms = {
           waveform1: createWaveSurfer(
             "waveform1",
-            `${window.location.origin}/assets/sounds/mixkit-gimme-that-groove-872.mp3`
+            "assets/sounds/mixkit-gimme-that-groove-872.mp3"
           ),
           waveform2: createWaveSurfer(
             "waveform2",
-            `${window.location.origin}/assets/sounds/mixkit-happy-and-all-that-514.mp3`
+            "assets/sounds/mixkit-happy-and-all-that-514.mp3"
           ),
           waveform3: createWaveSurfer(
             "waveform3",
-            `${window.location.origin}/assets/sounds/mixkit-babe-783.mp3`
+            "assets/sounds/mixkit-babe-783.mp3"
           ),
           waveform4: createWaveSurfer(
             "waveform4",
-            `${window.location.origin}/assets/sounds/mixkit-epic-games-76.mp3`
+            "assets/sounds/mixkit-epic-games-76.mp3"
           ),
           waveform5: createWaveSurfer(
             "waveform5",
-            `${window.location.origin}/assets/sounds/mixkit-hip-hop-03-739.mp3`
+            "assets/sounds/mixkit-hip-hop-03-739.mp3"
           ),
           waveform6: createWaveSurfer(
             "waveform6",
-            `${window.location.origin}/assets/sounds/mixkit-smooth-jazz-640.mp3`
+            "assets/sounds/mixkit-smooth-jazz-640.mp3"
           ),
         };
+
+        // const waveforms = {
+        //   waveform1: createWaveSurfer(
+        //     "waveform1",
+        //     `${window.location.origin}/assets/sounds/mixkit-gimme-that-groove-872.mp3`
+        //   ),
+        //   waveform2: createWaveSurfer(
+        //     "waveform2",
+        //     `${window.location.origin}/assets/sounds/mixkit-happy-and-all-that-514.mp3`
+        //   ),
+        //   waveform3: createWaveSurfer(
+        //     "waveform3",
+        //     `${window.location.origin}/assets/sounds/mixkit-babe-783.mp3`
+        //   ),
+        //   waveform4: createWaveSurfer(
+        //     "waveform4",
+        //     `${window.location.origin}/assets/sounds/mixkit-epic-games-76.mp3`
+        //   ),
+        //   waveform5: createWaveSurfer(
+        //     "waveform5",
+        //     `${window.location.origin}/assets/sounds/mixkit-hip-hop-03-739.mp3`
+        //   ),
+        //   waveform6: createWaveSurfer(
+        //     "waveform6",
+        //     `${window.location.origin}/assets/sounds/mixkit-smooth-jazz-640.mp3`
+        //   ),
+        // };
 
         let currentPlaying = null;
 
