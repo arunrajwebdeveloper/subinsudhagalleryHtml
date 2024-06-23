@@ -5,12 +5,15 @@
   const navMenuClose = document.getElementById("nav-menu-close");
   const mainNavigation = document.getElementById("main-navigation");
   const menuOverlay = document.getElementById("menu-overlay");
+  const body = document.body;
 
   navMenuToggle.addEventListener("click", function () {
     if (!mainNavigation.classList.contains("active")) {
+      body.classList.add("body-overflow-hidden");
       menuOverlay.classList.add("active");
       mainNavigation.classList.add("active");
     } else {
+      body.classList.remove("body-overflow-hidden");
       menuOverlay.classList.remove("active");
       mainNavigation.classList.remove("active");
     }
@@ -18,6 +21,7 @@
 
   navMenuClose.addEventListener("click", function () {
     if (mainNavigation.classList.contains("active")) {
+      body.classList.remove("body-overflow-hidden");
       menuOverlay.classList.remove("active");
       mainNavigation.classList.remove("active");
     }
@@ -25,9 +29,6 @@
 
   // Close the sidebar when clicking outside of it
   document.addEventListener("click", function (event) {
-    const navMenuToggle = document.getElementById("nav-menu-toggle");
-    const mainNavigation = document.getElementById("main-navigation");
-
     if (
       event &&
       event.target !== navMenuToggle &&
@@ -35,6 +36,7 @@
       !navMenuToggle.contains(event.target) &&
       !mainNavigation.contains(event.target)
     ) {
+      body.classList.remove("body-overflow-hidden");
       menuOverlay.classList.remove("active");
       mainNavigation.classList.remove("active");
     }
