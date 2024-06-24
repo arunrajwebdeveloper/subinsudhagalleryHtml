@@ -886,7 +886,7 @@ ul {
 
 .sounds-list {
   display: flex;
-  gap: 15px;
+  gap: 28px 15px;
   flex-wrap: wrap;
 }
 
