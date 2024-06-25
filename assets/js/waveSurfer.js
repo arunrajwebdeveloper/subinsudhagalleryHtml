@@ -20,7 +20,12 @@ function createWaveSurfer(containerId, audioFile) {
     const loadingElement = document.getElementById(
       `loading-element${containerId.charAt(containerId.length - 1)}`
     );
-    loadingElement.innerText = `${percent}%`;
+    loadingElement.innerHTML = `
+    <div>${percent}%</div>
+    <div class="progress-track">
+    <div class="progress-bar" style="width: ${percent}%"></div>
+    </div>
+    `;
   });
 
   // on ready
