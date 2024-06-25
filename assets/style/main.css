@@ -914,6 +914,14 @@ ul {
   line-height: normal;
   display: block;
 }
+.sounds-list .sound-item-content .item-subtext > em {
+  font-style: normal;
+  display: inline-block;
+  background-color: #eaeaea;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-right: 2px;
+}
 .sounds-list .sound-item .controls {
   position: absolute;
   left: 50%;

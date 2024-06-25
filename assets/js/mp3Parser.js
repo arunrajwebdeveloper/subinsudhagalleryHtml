@@ -11,19 +11,58 @@ const MPEG_SAMPLE_RATES = [
 ];
 
 function parseFrameHeader(header) {
+  const b0 = header[0];
   const b1 = header[1];
   const b2 = header[2];
-  const versionBits = (b1 >> 3) & 0x03;
-  const layerBits = (b1 >> 1) & 0x03;
-  const bitrateIndex = (b2 >> 4) & 0x0f;
-  const sampleRateIndex = (b2 >> 2) & 0x03;
+  const b3 = header[3];
 
-  const version = versionBits === 3 ? 2 : versionBits === 2 ? 1 : 0;
-  const layer = 4 - layerBits;
-  const bitrate = MPEG_BIT_RATES[layer - 1][bitrateIndex];
-  const sampleRate = MPEG_SAMPLE_RATES[version][sampleRateIndex];
+  // Verify the sync word
+  if (b0 === 0xff && (b1 & 0xe0) === 0xe0) {
+    const versionBits = (b1 >> 3) & 0x03;
+    const layerBits = (b1 >> 1) & 0x03;
+    const bitrateIndex = (b2 >> 4) & 0x0f;
+    const sampleRateIndex = (b2 >> 2) & 0x03;
 
-  return { bitrate, sampleRate };
+    let version, layer;
+
+    switch (versionBits) {
+      case 0:
+        version = 2.5;
+        break;
+      case 2:
+        version = 2;
+        break;
+      case 3:
+        version = 1;
+        break;
+      default:
+        version = -1;
+    }
+
+    switch (layerBits) {
+      case 1:
+        layer = 3;
+        break;
+      case 2:
+        layer = 2;
+        break;
+      case 3:
+        layer = 1;
+        break;
+      default:
+        layer = -1;
+    }
+
+    const bitrate = MPEG_BIT_RATES[layer - 1][bitrateIndex];
+    const sampleRate =
+      MPEG_SAMPLE_RATES[version === 1 ? 0 : version === 2 ? 1 : 2][
+        sampleRateIndex
+      ];
+
+    return { bitrate, sampleRate };
+  }
+
+  throw new Error("Invalid MP3 frame header");
 }
 
 // Trim text
@@ -38,26 +77,40 @@ function trimFileName(fileName, maxLength = 30) {
 }
 
 async function audioMetaData(url) {
-  return fetch(url)
-    .then((response) => response.arrayBuffer())
-    .then((buffer) => {
-      const data = new Uint8Array(buffer);
+  try {
+    const response = await fetch(url);
+    const buffer = await response.arrayBuffer();
+    const data = new Uint8Array(buffer);
 
-      // Get file size in MB
-      const fileSizeInBytes = data.length;
-      const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
+    // Get file size in MB
+    const fileSizeInBytes = data.length;
+    const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
 
-      // Parse MP3 headers
-      const header = data.slice(0, 4);
-      const { bitrate, sampleRate } = parseFrameHeader(header);
+    // Find MP3 frame header (skip potential ID3 tags)
+    let headerIndex = 0;
+    while (headerIndex < data.length - 4) {
+      if (
+        data[headerIndex] === 0xff &&
+        (data[headerIndex + 1] & 0xe0) === 0xe0
+      ) {
+        break;
+      }
+      headerIndex++;
+    }
 
-      // Extract file name from URL
-      const fileName = url.split("/").pop();
-      const trimmedFileName = trimFileName(fileName);
+    if (headerIndex >= data.length - 4) {
+      throw new Error("MP3 frame header not found");
+    }
 
-      return { fileName: trimmedFileName, sampleRate, bitrate, fileSizeInMB };
-    })
-    .catch((error) => {
-      console.error("Error fetching or processing the audio file:", error);
-    });
+    const header = data.slice(headerIndex, headerIndex + 4);
+    const { bitrate, sampleRate } = parseFrameHeader(header);
+
+    // Extract file name from URL
+    const fileName = url.split("/").pop();
+    const trimmedFileName = trimFileName(fileName);
+
+    return { fileName: trimmedFileName, sampleRate, bitrate, fileSizeInMB };
+  } catch (error) {
+    console.error("Error fetching or processing the audio file:", error);
+  }
 }

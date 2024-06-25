@@ -68,187 +68,8 @@
             <h2>Sound Recordings</h2>
           </div>
           <div class="content-wrapper">
-            <ul class="sounds-list">
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton1"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform1')"
-                      ></button>
-                    </div>
-                  </div>
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <!-- <div class="controls">
-                        <button
-                          class="sound-control-btn"
-                          onclick="stop('waveform1')"
-                        >
-                          Stop
-                        </button>
-                      </div> -->
-                      <div id="waveform1"></div>
-                      <div class="timecode">
-                        <span id="currentTime1">00:00:00</span>
-                        <span id="totalDuration1">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render1"></div>
-                  </div>
-                </div>
-              </li>
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb-1.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton2"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform2')"
-                      ></button>
-                    </div>
-                  </div>
-
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <div id="waveform2"></div>
-                      <div class="timecode">
-                        <span id="currentTime2">00:00:00</span>
-                        <span id="totalDuration2">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render2"></div>
-                  </div>
-                </div>
-              </li>
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb-2.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton3"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform3')"
-                      ></button>
-                    </div>
-                  </div>
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <div id="waveform3"></div>
-                      <div class="timecode">
-                        <span id="currentTime3">00:00:00</span>
-                        <span id="totalDuration3">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render3"></div>
-                  </div>
-                </div>
-              </li>
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb-3.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton4"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform4')"
-                      ></button>
-                    </div>
-                  </div>
-
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <div id="waveform4"></div>
-                      <div class="timecode">
-                        <span id="currentTime4">00:00:00</span>
-                        <span id="totalDuration4">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render4"></div>
-                  </div>
-                </div>
-              </li>
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb-4.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton5"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform5')"
-                      ></button>
-                    </div>
-                  </div>
-
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <div id="waveform5"></div>
-                      <div class="timecode">
-                        <span id="currentTime5">00:00:00</span>
-                        <span id="totalDuration5">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render5"></div>
-                  </div>
-                </div>
-              </li>
-              <li class="sound-item">
-                <div class="sound-item-wrap">
-                  <div class="album-cover">
-                    <img
-                      class="sound-thumbnail"
-                      src="./assets/images/music-thumb-5.jpg"
-                      alt="music image"
-                    />
-                    <div class="controls">
-                      <button
-                        id="playPauseButton6"
-                        class="sound-control-btn play"
-                        onclick="playPause('waveform6')"
-                      ></button>
-                    </div>
-                  </div>
-
-                  <div class="sound-item-content">
-                    <div class="sound-player">
-                      <div id="waveform6"></div>
-                      <div class="timecode">
-                        <span id="currentTime6">00:00:00</span>
-                        <span id="totalDuration6">00:00:00</span>
-                      </div>
-                    </div>
-                    <div id="file-info-render6"></div>
-                  </div>
-                </div>
-              </li>
+            <ul id="soundsList" class="sounds-list">
+              <!-- Sound items will be dynamically added here -->
             </ul>
           </div>
         </div>
@@ -348,184 +169,90 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js"></script>
     <script src="./assets/js/mp3Parser.js"></script>
+    <script src="./assets/js/waveSurfer.js"></script>
     <script src="./assets/js/index.js"></script>
 
     <script>
-      // Function to create a WaveSurfer instance and load the audio file
-      function createWaveSurfer(containerId, audioFile) {
-        var wavesurfer = WaveSurfer.create({
-          container: `#${containerId}`,
-          waveColor: "#c6c6c6",
-          progressColor: "orange",
-          backend: "MediaElement", // Use MediaElement backend to ensure cross-browser compatibility
-          barWidth: 2,
-          height: 60,
-          responsive: true,
-          dragToSeek: true,
+      const soundData = [
+        {
+          id: 1,
+          imageSrc: "./assets/images/music-thumb.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-gimme-that-groove-872.mp3`,
+        },
+        {
+          id: 2,
+          imageSrc: "./assets/images/music-thumb-1.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-happy-and-all-that-514.mp3`,
+        },
+        {
+          id: 3,
+          imageSrc: "./assets/images/music-thumb-2.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-babe-783.mp3`,
+        },
+        {
+          id: 4,
+          imageSrc: "./assets/images/music-thumb-3.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-epic-games-76.mp3`,
+        },
+        {
+          id: 5,
+          imageSrc: "./assets/images/music-thumb-4.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-hip-hop-03-739.mp3`,
+        },
+        {
+          id: 6,
+          imageSrc: "./assets/images/music-thumb-5.jpg",
+          audioFile: `${window.location.origin}/assets/sounds/mixkit-smooth-jazz-640.mp3`,
+        },
+      ];
+
+      // Function to dynamically generate sound items
+      function generateSoundItems() {
+        const soundsList = document.getElementById("soundsList");
+        soundData.forEach((sound) => {
+          const li = document.createElement("li");
+          li.className = "sound-item";
+          li.innerHTML = `
+       <div class="sound-item-wrap">
+         <div class="album-cover">
+           <img class="sound-thumbnail" src="${sound.imageSrc}" alt="music image" />
+           <div class="controls">
+             <button id="playPauseButton${sound.id}" class="sound-control-btn play" onclick="playPause('waveform${sound.id}')"></button>
+           </div>
+         </div>
+         <div class="sound-item-content">
+           <div class="sound-player">
+             <div id="waveform${sound.id}"></div>
+             <div id="loading-element${sound.id}"></div>
+             <div class="timecode">
+               <span id="currentTime${sound.id}">00:00:00</span>
+               <span id="totalDuration${sound.id}">00:00:00</span>
+             </div>
+           </div>
+           <div id="file-info-render${sound.id}"></div>
+         </div>
+       </div>
+     `;
+          soundsList.appendChild(li);
         });
-
-        // Load the audio file
-        wavesurfer.load(audioFile);
-
-        // on ready
-        wavesurfer.on("ready", () => {
-          // get meta
-          getAudioMetaData(containerId, audioFile);
-          // Set audio track total duration
-          const duration = wavesurfer.getDuration();
-          getTotalTime(containerId, duration);
-        });
-
-        // Event listener to update play/pause button text
-        wavesurfer.on("play", function () {
-          updatePlayPauseButton(containerId, true);
-        });
-
-        wavesurfer.on("pause", function () {
-          updatePlayPauseButton(containerId, false);
-        });
-
-        // Handle audio end event
-        wavesurfer.on("finish", () => {
-          wavesurfer.seekTo(0); // Seek back to the start
-          updatePlayPauseButton(containerId, false);
-        });
-
-        // Event listener to log errors
-        wavesurfer.on("error", function (e) {
-          console.error(`Error loading audio for ${containerId}:`, e);
-        });
-
-        // Sets the timecode current timestamp as audio plays
-        wavesurfer.on("audioprocess", () => {
-          const time = wavesurfer.getCurrentTime();
-          getCurrTime(containerId, time);
-        });
-
-        // Get current time in intraction
-        wavesurfer.on("interaction", () => {
-          const time = wavesurfer.getCurrentTime();
-          getCurrTime(containerId, time);
-        });
-
-        return wavesurfer;
       }
 
-      // GET AUDIO META DATA
-
-      async function getAudioMetaData(containerId, file) {
-        const meta = await audioMetaData(file);
-        const metadata = document.getElementById(
-          `file-info-render${containerId.charAt(containerId.length - 1)}`
-        );
-        metadata.innerHTML = `
-        <h2 class="item-title">${meta?.fileName}</h2>
-        <span class="item-subtext">
-          ${meta?.sampleRate ?? "__"}Hz  
-          ${meta?.bitrate ?? "__"}Kbps  
-          ${meta?.fileSizeInMB ?? "__"}MB
-          </span>`;
-      }
-
-      // Formats time as HH:MM:SS
-      const formatTimecode = (seconds) => {
-        return new Date(seconds * 1000).toISOString().substr(11, 8);
-      };
-
-      // get total duration
-      function getTotalTime(containerId, duration) {
-        const totalDuration = document.getElementById(
-          `totalDuration${containerId.charAt(containerId.length - 1)}`
-        );
-        totalDuration.innerHTML = formatTimecode(duration);
-      }
-
-      // get current time
-      function getCurrTime(containerId, time) {
-        const currentTime = document.getElementById(
-          `currentTime${containerId.charAt(containerId.length - 1)}`
-        );
-
-        currentTime.innerHTML = formatTimecode(time);
-      }
-
-      // Function to update play/pause button text
-      function updatePlayPauseButton(containerId, isPlaying) {
-        const button = document.getElementById(
-          `playPauseButton${containerId.charAt(containerId.length - 1)}`
-        );
-        if (button) {
-          // button.textContent = isPlaying ? "Pause" : "Play";
-          if (isPlaying) {
-            button.classList.remove("play");
-            button.classList.add("pause");
-          } else {
-            button.classList.remove("pause");
-            button.classList.add("play");
-          }
-        }
-      }
+      // Call the function to generate sound items
+      generateSoundItems();
 
       // Initialize WaveSurfer instances for each audio file on page load
-
       window.addEventListener("load", function () {
-        const waveforms = {
-          waveform1: createWaveSurfer(
-            "waveform1",
-            "assets/sounds/mixkit-gimme-that-groove-872.mp3"
-          ),
-          waveform2: createWaveSurfer(
-            "waveform2",
-            "assets/sounds/mixkit-happy-and-all-that-514.mp3"
-          ),
-          waveform3: createWaveSurfer(
-            "waveform3",
-            "assets/sounds/mixkit-babe-783.mp3"
-          ),
-          waveform4: createWaveSurfer(
-            "waveform4",
-            "assets/sounds/mixkit-epic-games-76.mp3"
-          ),
-          waveform5: createWaveSurfer(
-            "waveform5",
-            "assets/sounds/mixkit-hip-hop-03-739.mp3"
-          ),
-          waveform6: createWaveSurfer(
-            "waveform6",
-            "assets/sounds/mixkit-smooth-jazz-640.mp3"
-          ),
-        };
+        const waveforms = {};
 
-        // const waveforms = {
-        //   waveform1: createWaveSurfer(
-        //     "waveform1",
-        //     `${window.location.origin}/assets/sounds/mixkit-gimme-that-groove-872.mp3`
-        //   ),
-        //   waveform2: createWaveSurfer(
-        //     "waveform2",
-        //     `${window.location.origin}/assets/sounds/mixkit-happy-and-all-that-514.mp3`
-        //   ),
-        //   waveform3: createWaveSurfer(
-        //     "waveform3",
-        //     `${window.location.origin}/assets/sounds/mixkit-babe-783.mp3`
-        //   ),
-        //   waveform4: createWaveSurfer(
-        //     "waveform4",
-        //     `${window.location.origin}/assets/sounds/mixkit-epic-games-76.mp3`
-        //   ),
-        //   waveform5: createWaveSurfer(
-        //     "waveform5",
-        //     `${window.location.origin}/assets/sounds/mixkit-hip-hop-03-739.mp3`
-        //   ),
-        //   waveform6: createWaveSurfer(
-        //     "waveform6",
-        //     `${window.location.origin}/assets/sounds/mixkit-smooth-jazz-640.mp3`
-        //   ),
-        // };
+        soundData.forEach((sound) => {
+          waveforms[`waveform${sound.id}`] = createWaveSurfer(
+            `waveform${sound.id}`,
+            sound.audioFile
+          );
+        });
 
         let currentPlaying = null;
 
-        // Play/Pause function
         window.playPause = function (containerId) {
           if (currentPlaying && currentPlaying !== waveforms[containerId]) {
             currentPlaying.stop();
