@@ -95,9 +95,12 @@
                         </button>
                       </div> -->
                       <div id="waveform1"></div>
+                      <div class="timecode">
+                        <span id="currentTime1">00:00:00</span>
+                        <span id="totalDuration1">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">Mixkit-gimme-that-groove-872.mp3</h2>
-                    <span class="item-subtext">44Khz 320Kbs - 18.7MB</span>
+                    <div id="file-info-render1"></div>
                   </div>
                 </div>
               </li>
@@ -121,11 +124,12 @@
                   <div class="sound-item-content">
                     <div class="sound-player">
                       <div id="waveform2"></div>
+                      <div class="timecode">
+                        <span id="currentTime2">00:00:00</span>
+                        <span id="totalDuration2">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">
-                      Mixkit-happy-and-all-that-514.mp3
-                    </h2>
-                    <span class="item-subtext">44Khz 320Kbs - 12.3MB</span>
+                    <div id="file-info-render2"></div>
                   </div>
                 </div>
               </li>
@@ -148,9 +152,12 @@
                   <div class="sound-item-content">
                     <div class="sound-player">
                       <div id="waveform3"></div>
+                      <div class="timecode">
+                        <span id="currentTime3">00:00:00</span>
+                        <span id="totalDuration3">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">Mixkit-babe-783.mp3</h2>
-                    <span class="item-subtext">44Khz 320Kbs - 12.3MB</span>
+                    <div id="file-info-render3"></div>
                   </div>
                 </div>
               </li>
@@ -174,9 +181,12 @@
                   <div class="sound-item-content">
                     <div class="sound-player">
                       <div id="waveform4"></div>
+                      <div class="timecode">
+                        <span id="currentTime4">00:00:00</span>
+                        <span id="totalDuration4">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">Mixkit-epic-games-76.mp3</h2>
-                    <span class="item-subtext">44Khz 320Kbs - 12.3MB</span>
+                    <div id="file-info-render4"></div>
                   </div>
                 </div>
               </li>
@@ -200,9 +210,12 @@
                   <div class="sound-item-content">
                     <div class="sound-player">
                       <div id="waveform5"></div>
+                      <div class="timecode">
+                        <span id="currentTime5">00:00:00</span>
+                        <span id="totalDuration5">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">Mixkit-hip-hop-03-739.mp3</h2>
-                    <span class="item-subtext">44Khz 320Kbs - 12.3MB</span>
+                    <div id="file-info-render5"></div>
                   </div>
                 </div>
               </li>
@@ -226,9 +239,12 @@
                   <div class="sound-item-content">
                     <div class="sound-player">
                       <div id="waveform6"></div>
+                      <div class="timecode">
+                        <span id="currentTime6">00:00:00</span>
+                        <span id="totalDuration6">00:00:00</span>
+                      </div>
                     </div>
-                    <h2 class="item-title">Mixkit-smooth-jazz-640.mp3</h2>
-                    <span class="item-subtext">44Khz 320Kbs - 12.3MB</span>
+                    <div id="file-info-render6"></div>
                   </div>
                 </div>
               </li>
@@ -330,6 +346,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="./assets/js/mp3Parser.js"></script>
     <script src="./assets/js/index.js"></script>
 
     <script>
@@ -341,7 +358,7 @@
           progressColor: "orange",
           backend: "MediaElement", // Use MediaElement backend to ensure cross-browser compatibility
           barWidth: 2,
-          height: 75,
+          height: 60,
           responsive: true,
           dragToSeek: true,
         });
@@ -349,9 +366,14 @@
         // Load the audio file
         wavesurfer.load(audioFile);
 
-        // wavesurfer.on("loading", function (x) {
-        //   console.log("Loading file. Progress:" + x);
-        // });
+        // on ready
+        wavesurfer.on("ready", () => {
+          // get meta
+          getAudioMetaData(containerId, audioFile);
+          // Set audio track total duration
+          const duration = wavesurfer.getDuration();
+          getTotalTime(containerId, duration);
+        });
 
         // Event listener to update play/pause button text
         wavesurfer.on("play", function () {
@@ -373,7 +395,57 @@
           console.error(`Error loading audio for ${containerId}:`, e);
         });
 
+        // Sets the timecode current timestamp as audio plays
+        wavesurfer.on("audioprocess", () => {
+          const time = wavesurfer.getCurrentTime();
+          getCurrTime(containerId, time);
+        });
+
+        // Get current time in intraction
+        wavesurfer.on("interaction", () => {
+          const time = wavesurfer.getCurrentTime();
+          getCurrTime(containerId, time);
+        });
+
         return wavesurfer;
+      }
+
+      // GET AUDIO META DATA
+
+      async function getAudioMetaData(containerId, file) {
+        const meta = await audioMetaData(file);
+        const metadata = document.getElementById(
+          `file-info-render${containerId.charAt(containerId.length - 1)}`
+        );
+        metadata.innerHTML = `
+        <h2 class="item-title">${meta?.fileName}</h2>
+        <span class="item-subtext">
+          ${meta?.sampleRate ?? "__"}Hz  
+          ${meta?.bitrate ?? "__"}Kbps  
+          ${meta?.fileSizeInMB ?? "__"}MB
+          </span>`;
+      }
+
+      // Formats time as HH:MM:SS
+      const formatTimecode = (seconds) => {
+        return new Date(seconds * 1000).toISOString().substr(11, 8);
+      };
+
+      // get total duration
+      function getTotalTime(containerId, duration) {
+        const totalDuration = document.getElementById(
+          `totalDuration${containerId.charAt(containerId.length - 1)}`
+        );
+        totalDuration.innerHTML = formatTimecode(duration);
+      }
+
+      // get current time
+      function getCurrTime(containerId, time) {
+        const currentTime = document.getElementById(
+          `currentTime${containerId.charAt(containerId.length - 1)}`
+        );
+
+        currentTime.innerHTML = formatTimecode(time);
       }
 
       // Function to update play/pause button text

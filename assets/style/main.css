@@ -956,6 +956,23 @@ ul {
   margin-top: 10px;
 }
 
+.sounds-list .timecode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.sounds-list .timecode > span {
+  color: #1f1f1f;
+  font-size: 12px;
+  user-select: none;
+  background-color: #eaeaea;
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
 /* RESPONSIVE */
 
 @media screen and (max-width: 767px) {
@@ -1082,7 +1099,7 @@ ul {
     width: calc(100% - 130px);
   }
   .sounds-list .sound-item .sound-player {
-    margin-bottom: 15px;
+    margin-bottom: 6px;
   }
   .sounds-list .sound-item-content .item-title {
     font-size: 18px;
