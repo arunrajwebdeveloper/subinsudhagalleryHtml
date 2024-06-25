@@ -982,7 +982,7 @@ ul {
 }
 
 .loading-element .progress-track {
-  height: 2px;
+  height: 1px;
   position: relative;
   width: 100%;
   background-color: #c6c6c6;
