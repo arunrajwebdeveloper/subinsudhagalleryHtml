@@ -1016,6 +1016,11 @@ ul {
 .sound-cover__skeleton {
   width: 100%;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: #000;
 }
 .sound-cover__skeleton::before {
   content: "";
