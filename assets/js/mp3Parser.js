@@ -91,17 +91,6 @@ function parseWAVHeader(data) {
   return { bitrate, sampleRate, channels, bitsPerSample };
 }
 
-function parseWMAHeader(data) {
-  const sampleRate =
-    data[24] | (data[25] << 8) | (data[26] << 16) | (data[27] << 24);
-  const byteRate =
-    data[28] | (data[29] << 8) | (data[30] << 16) | (data[31] << 24);
-  const bitsPerSample = data[34] | (data[35] << 8);
-  const channels = data[22] | (data[23] << 8);
-  const bitrate = (byteRate * 8) / 1000;
-  return { bitrate, sampleRate, channels, bitsPerSample };
-}
-
 function trimFileName(fileName, maxLength = 30) {
   if (fileName.length <= maxLength) {
     return fileName;
@@ -161,8 +150,6 @@ async function audioMetaData(url) {
       metadata = parseAACHeader(header);
     } else if (fileType === "wav") {
       metadata = parseWAVHeader(data);
-    } else if (fileType === "wma") {
-      metadata = parseWMAHeader(data);
     } else {
       throw new Error("Unsupported file type");
     }
