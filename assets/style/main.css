@@ -959,7 +959,7 @@ ul {
   z-index: 2;
 }
 .sounds-list .sound-item .sound-control-btn:hover {
-  background-color: rgba(255, 166, 0, 0.363);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .audio-progress-element {
   position: absolute;
@@ -968,7 +968,7 @@ ul {
   width: 80px;
   height: 80px;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 4;
   pointer-events: none;
 }
 .progress-circle-svg {
