@@ -573,6 +573,9 @@ ul {
   max-width: 100%;
   border-radius: 2px;
 }
+.grid-list .grid-item img {
+  background-color: #f6f6f6;
+}
 
 .grid-list .grid-item .item-content {
   position: relative;
@@ -1040,11 +1043,18 @@ ul {
   font-size: 22px;
   color: #000;
 }
+.grid-list .grid-item .img-holder::before,
 .sound-cover__skeleton::before {
   content: "";
   float: left;
+}
+.grid-list .grid-item .img-holder::before {
+  padding-top: 80%;
+}
+.sound-cover__skeleton::before {
   padding-top: 100%;
 }
+.grid-list .grid-item .img-holder::after,
 .sound-cover__skeleton::after {
   content: "";
   display: block;
