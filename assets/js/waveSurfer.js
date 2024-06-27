@@ -15,20 +15,26 @@ function createWaveSurfer(containerId, audioFile) {
   wavesurfer.load(audioFile);
 
   // Event listener to update play/pause button text
-
   wavesurfer.on("loading", function (percent) {
-    const loadingElement = document.getElementById(
-      `loading-element${containerId.charAt(containerId.length - 1)}`
+    const sound__load__percent = document.getElementById(
+      `sound__load__percent${containerId.charAt(containerId.length - 1)}`
     );
-    loadingElement.innerHTML = `<div>${percent}%</div>`;
+
+    sound__load__percent.innerText = `${percent}%`;
   });
 
   // on ready
   wavesurfer.on("ready", () => {
-    const loadingElement = document.getElementById(
-      `loading-element${containerId.charAt(containerId.length - 1)}`
+    const skeleton__loader = document.getElementById(
+      `sound__skeleton__${containerId.charAt(containerId.length - 1)}`
     );
-    loadingElement.style.display = "none";
+
+    const sound__item__block = document.getElementById(
+      `sound__item__block__${containerId.charAt(containerId.length - 1)}`
+    );
+
+    skeleton__loader.remove();
+    sound__item__block.style.display = "flex";
 
     // get meta
     getAudioMetaData(containerId, audioFile);

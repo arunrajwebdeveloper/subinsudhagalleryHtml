@@ -989,6 +989,106 @@ ul {
   border-radius: 4px;
 }
 
+/* SOUND SKELETON LOADER */
+.sound__skeleton__loader {
+  background-color: #eaeaea;
+}
+/* .sound-cover__skeleton {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+}
+
+@supports not (aspect-ratio: 1 / 1) {
+  .sound-cover__skeleton::before {
+    float: left;
+    padding-top: 100%;
+    content: "";
+  }
+
+  .sound-cover__skeleton::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+} */
+
+.sound-cover__skeleton {
+  width: 100%;
+  border-radius: 10px;
+}
+.sound-cover__skeleton::before {
+  content: "";
+  float: left;
+  padding-top: 100%;
+}
+.sound-cover__skeleton::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.sound-item-content__skeleton {
+  margin-top: 10px;
+}
+
+.sound-timecode-item__skeleton {
+  height: 14px;
+  display: inline-block;
+  width: 60px;
+}
+.sound-title__skeleton {
+  height: 22px;
+}
+.sound-subtext__skeleton {
+  width: 60px;
+  height: 18px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 2px;
+  border-radius: 3px;
+}
+
+.sound__skeleton__loader {
+  -moz-animation: 1.5s skeleton__animation linear infinite;
+  -webkit-animation: 1.5s skeleton__animation linear infinite;
+  animation: 1.5s skeleton__animation linear infinite;
+}
+
+@-moz-keyframes skeleton__animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes skeleton__animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes skeleton__animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /* RESPONSIVE */
 
 @media screen and (max-width: 767px) {
@@ -997,6 +1097,12 @@ ul {
   }
   .sounds-list {
     padding-left: 15px;
+  }
+
+  /* skeleton sound */
+
+  .sound-player__skeleton {
+    display: none;
   }
 }
 
@@ -1123,6 +1229,36 @@ ul {
   .sounds-list .sound-item-content .item-subtext {
     font-size: 12px;
   }
+
+  /* skeleton sound */
+
+  .sound-item-wrap__skeleton {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+  .sound-cover__skeleton {
+    max-width: 150px;
+  }
+  .sound-item-content__skeleton {
+    margin-top: 0;
+    width: calc(100% - 150px);
+  }
+  .sound-waveform__skeleton {
+    height: 60px;
+  }
+  .sound-timecode__skeleton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  .sound-title__skeleton {
+    height: 22px;
+    max-width: 290px;
+  }
 }
 @media screen and (min-width: 992px) {
   .main-navigation {
@@ -1192,4 +1328,9 @@ ul {
   .single-image-list .grid-item {
     width: calc(33.333333333% - 55px);
   }
+}
+
+/* initial hide - remove while react development */
+.sounds-list .sound-item .sound-item-wrap {
+  display: none;
 }

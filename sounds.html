@@ -210,26 +210,46 @@
           const li = document.createElement("li");
           li.className = "sound-item";
           li.innerHTML = `
-       <div class="sound-item-wrap">
-         <div class="album-cover">
-           <img class="sound-thumbnail" src="${sound.imageSrc}" alt="music image" />
-           <div class="controls">
-             <button id="playPauseButton${sound.id}" class="sound-control-btn play" onclick="playPause('waveform${sound.id}')"></button>
-           </div>
-         </div>
-         <div class="sound-item-content">
-           <div class="sound-player">
-             <div id="waveform${sound.id}"></div>
-             <div id="loading-element${sound.id}"></div>
-             <div class="timecode">
-               <span id="currentTime${sound.id}">00:00:00</span>
-               <span id="totalDuration${sound.id}">00:00:00</span>
-             </div>
-           </div>
-           <div id="file-info-render${sound.id}"></div>
-         </div>
-       </div>
-     `;
+              <div id="sound__skeleton__${sound.id}" class="sound-item-wrap__skeleton">
+                <div class="sound__skeleton__loader sound-cover__skeleton"><div id="sound__load__percent${sound.id}"></div></div>
+                <div class="sound-item-content__skeleton">
+                  <div class="sound-player__skeleton">
+                    <div class="sound__skeleton__loader sound-waveform__skeleton"></div>
+                    <div class="sound-timecode__skeleton">
+                      <span class="sound__skeleton__loader sound-timecode-item__skeleton"></span>
+                      <span class="sound__skeleton__loader sound-timecode-item__skeleton"></span>
+                    </div>
+                  </div>
+                  <div class="sound-info-render__skeleton">
+                    <div class="sound__skeleton__loader sound-title__skeleton"></div>
+                    <div>
+                      <span class="sound__skeleton__loader sound-subtext__skeleton"></span>
+                      <span class="sound__skeleton__loader sound-subtext__skeleton"></span>
+                      <span class="sound__skeleton__loader sound-subtext__skeleton"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         
+            <div id="sound__item__block__${sound.id}" class="sound-item-wrap">
+              <div class="album-cover">
+                <img class="sound-thumbnail" src="${sound.imageSrc}" alt="music image" />
+                <div class="controls">
+                  <button id="playPauseButton${sound.id}" class="sound-control-btn play" onclick="playPause('waveform${sound.id}')"></button>
+                </div>
+              </div>
+              <div class="sound-item-content">
+                <div class="sound-player">
+                  <div id="waveform${sound.id}"></div>
+                  <div class="timecode">
+                    <span id="currentTime${sound.id}">00:00:00</span>
+                    <span id="totalDuration${sound.id}">00:00:00</span>
+                  </div>
+                </div>
+                <div id="file-info-render${sound.id}"></div>
+              </div>
+            </div>
+    `;
           soundsList.appendChild(li);
         });
       }
