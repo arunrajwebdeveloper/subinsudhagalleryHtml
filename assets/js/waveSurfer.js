@@ -107,8 +107,24 @@ function updateProgressBar(containerId, duration, currentTime) {
   progress_circle_svg.style.strokeDashoffset = 224.82 - progress;
 }
 
-// GET AUDIO META DATA
+const fileTypeColors = (type) => {
+  switch (type) {
+    case "mp3":
+      return "badge__MP3";
+    case "aac":
+      return "badge__AAC";
+    case "m4a":
+      return "badge__M4A";
+    case "wav":
+      return "badge__WAV";
+    case "wma":
+      return "badge__WMA";
+    default:
+      return "";
+  }
+};
 
+// GET AUDIO META DATA
 async function getAudioMetaData(containerId, file) {
   const meta = await audioMetaData(file);
   const metadata = document.getElementById(
@@ -117,9 +133,11 @@ async function getAudioMetaData(containerId, file) {
   metadata.innerHTML = `
     <h2 class="item-title">${meta?.fileName}</h2>
     <span class="item-subtext">
-      <em>${meta?.sampleRate ?? "__"}Hz</em>  
-      <em>${meta?.bitrate ?? "__"}Kbps</em>
-      <em>${meta?.fileSizeInMB ?? "__"}MB</em>
+      <em class="${fileTypeColors(meta?.fileType)}">${meta?.fileType}</em>
+      ${meta?.sampleRate ? `<em>${meta?.sampleRate}Hz</em>` : ""}  
+      ${meta?.bitrate ? `<em>${meta?.bitrate}Kbps</em>` : ""}
+      <em>${meta?.fileSizeInMB}MB</em>
+      ${meta?.channels ? `<em>CH ${meta?.channels}</em>` : ""}
     </span>`;
 }
 

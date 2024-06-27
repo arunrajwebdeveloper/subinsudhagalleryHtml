@@ -916,12 +916,16 @@ ul {
   line-height: normal;
 }
 .sounds-list .sound-item-content .item-subtext {
-  font-size: 12px;
+  font-size: 10px;
   color: #666;
   line-height: normal;
   display: block;
   font-family: var(--secondary-font);
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 .sounds-list .sound-item-content .item-subtext > em {
   font-style: normal;
@@ -931,6 +935,27 @@ ul {
   border-radius: 4px;
   margin-right: 2px;
 }
+.sounds-list .sound-item-content .item-subtext > em.badge__AAC {
+  color: #fff !important;
+  background-color: #2f59d8 !important;
+}
+.sounds-list .sound-item-content .item-subtext > em.badge__M4A {
+  color: #fff !important;
+  background-color: #2882be !important;
+}
+.sounds-list .sound-item-content .item-subtext > em.badge__MP3 {
+  color: #fff !important;
+  background-color: #26b821 !important;
+}
+.sounds-list .sound-item-content .item-subtext > em.badge__WAV {
+  color: #fff !important;
+  background-color: #f8aa00 !important;
+}
+.sounds-list .sound-item-content .item-subtext > em.badge__WMA {
+  color: #fff !important;
+  background-color: #1cc49f !important;
+}
+
 .sounds-list .sound-item .controls {
   position: absolute;
   left: 50%;
@@ -1177,6 +1202,10 @@ ul {
   .contact-page-content .email-enquiry {
     display: inline-block;
   }
+
+  .sounds-list .sound-item-content .item-subtext {
+    font-size: 12px;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -1232,7 +1261,7 @@ ul {
   }
 
   .sounds-list {
-    gap: 30px;
+    gap: 40px;
   }
   .sounds-list .sound-item {
     width: 100%;
@@ -1256,9 +1285,6 @@ ul {
   }
   .sounds-list .sound-item-content .item-title {
     font-size: 18px;
-  }
-  .sounds-list .sound-item-content .item-subtext {
-    font-size: 12px;
   }
 
   /* skeleton sound */
