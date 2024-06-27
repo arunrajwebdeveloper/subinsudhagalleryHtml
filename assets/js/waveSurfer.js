@@ -34,7 +34,7 @@ function createWaveSurfer(containerId, audioFile) {
     );
 
     skeleton__loader.remove();
-    sound__item__block.style.display = "flex";
+    sound__item__block.classList.add("visible__element");
 
     // get meta
     getAudioMetaData(containerId, audioFile);
@@ -55,7 +55,9 @@ function createWaveSurfer(containerId, audioFile) {
   // Handle audio end event
   wavesurfer.on("finish", () => {
     wavesurfer.seekTo(0); // Seek back to the start
+    const duration = wavesurfer.getDuration();
     updatePlayPauseButton(containerId, false);
+    updateProgressBar(containerId, duration, 0);
   });
 
   // Event listener to log errors
@@ -64,18 +66,45 @@ function createWaveSurfer(containerId, audioFile) {
   });
 
   // Sets the timecode current timestamp as audio plays
-  wavesurfer.on("audioprocess", () => {
-    const time = wavesurfer.getCurrentTime();
+  wavesurfer.on("audioprocess", (time) => {
+    const duration = wavesurfer.getDuration();
     getCurrTime(containerId, time);
+    updateProgressBar(containerId, duration, time);
   });
 
   // Get current time in intraction
   wavesurfer.on("interaction", () => {
     const time = wavesurfer.getCurrentTime();
+    const duration = wavesurfer.getDuration();
     getCurrTime(containerId, time);
+    updateProgressBar(containerId, duration, time);
+  });
+
+  // Get current time in seeking
+  // wavesurfer.on("seeking", (time) => {
+  //   const duration = wavesurfer.getDuration();
+  //   getCurrTime(containerId, time);
+  //   updateProgressBar(containerId, duration, time);
+  // });
+
+  // Get current time in timeupdate
+  wavesurfer.on("timeupdate", (time) => {
+    const duration = wavesurfer.getDuration();
+    getCurrTime(containerId, time);
+    updateProgressBar(containerId, duration, time);
   });
 
   return wavesurfer;
+}
+
+// Update progress svg
+function updateProgressBar(containerId, duration, currentTime) {
+  const progress_circle_svg = document.getElementById(
+    `progress-circle-svg__${containerId.charAt(containerId.length - 1)}`
+  );
+
+  const progress = (currentTime / duration) * 224.82;
+  progress_circle_svg.style.strokeDashoffset = 224.82 - progress;
 }
 
 // GET AUDIO META DATA
@@ -86,11 +115,11 @@ async function getAudioMetaData(containerId, file) {
     `file-info-render${containerId.charAt(containerId.length - 1)}`
   );
   metadata.innerHTML = `
-  <h2 class="item-title">${meta?.fileName}</h2>
-  <span class="item-subtext">
-    <em>${meta?.sampleRate ?? "__"}Hz</em>  
-    <em>${meta?.bitrate ?? "__"}Kbps</em>
-    <em>${meta?.fileSizeInMB ?? "__"}MB</em>
+    <h2 class="item-title">${meta?.fileName}</h2>
+    <span class="item-subtext">
+      <em>${meta?.sampleRate ?? "__"}Hz</em>  
+      <em>${meta?.bitrate ?? "__"}Kbps</em>
+      <em>${meta?.fileSizeInMB ?? "__"}MB</em>
     </span>`;
 }
 
@@ -122,7 +151,6 @@ function updatePlayPauseButton(containerId, isPlaying) {
     `playPauseButton${containerId.charAt(containerId.length - 1)}`
   );
   if (button) {
-    // button.textContent = isPlaying ? "Pause" : "Play";
     if (isPlaying) {
       button.classList.remove("play");
       button.classList.add("pause");

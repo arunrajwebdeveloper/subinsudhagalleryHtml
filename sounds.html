@@ -236,7 +236,12 @@
                 <img class="sound-thumbnail" src="${sound.imageSrc}" alt="music image" />
                 <div class="controls">
                   <button id="playPauseButton${sound.id}" class="sound-control-btn play" onclick="playPause('waveform${sound.id}')"></button>
-                </div>
+                  <div class="audio-progress-element">
+                    <svg width="80" height="80">
+                      <circle id="progress-circle-svg__${sound.id}" class="progress-circle-svg" fill="none" stroke="orange" stroke-width="7" cx="40" cy="40" r="35.77378" />
+                    </svg>
+                  </div>
+                  </div>
               </div>
               <div class="sound-item-content">
                 <div class="sound-player">
