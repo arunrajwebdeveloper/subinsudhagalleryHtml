@@ -1157,7 +1157,9 @@ ul {
   .sounds-list {
     padding-left: 15px;
   }
-
+  .sounds-list .sound-item .sound-control-btn.pause {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
   /* skeleton sound */
 
   .sound-player__skeleton {
