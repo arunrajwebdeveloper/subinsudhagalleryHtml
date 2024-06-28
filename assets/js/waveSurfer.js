@@ -1,14 +1,28 @@
+// Gradient for wave color
+const gradientMaker = ({ startColor = "#eee", endColor = "#ccc" }) => {
+  var ctx = document.createElement("canvas").getContext("2d");
+  var linGrad = ctx.createLinearGradient(0, 0, 1000, 128);
+  linGrad.addColorStop(0, startColor);
+  linGrad.addColorStop(1, endColor);
+  return linGrad;
+};
+
 // Function to create a WaveSurfer instance and load the audio file
 function createWaveSurfer(containerId, audioFile) {
   var wavesurfer = WaveSurfer.create({
     container: `#${containerId}`,
-    waveColor: "#c6c6c6",
-    progressColor: "orange",
     backend: "MediaElement", // Use MediaElement backend to ensure cross-browser compatibility
     barWidth: 2,
     height: 60,
     responsive: true,
     dragToSeek: true,
+    // progressColor: "orange",
+    // waveColor: "#c6c6c6",
+    waveColor: gradientMaker({ startColor: "#C6CDDC", endColor: "#B2B8D1" }),
+    progressColor: gradientMaker({
+      startColor: "#ffd17b",
+      endColor: "#ffa500",
+    }),
   });
 
   // Load the audio file
