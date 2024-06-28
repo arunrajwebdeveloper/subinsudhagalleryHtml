@@ -1369,6 +1369,11 @@ ul {
   .single-page-wrapper .page-splits.split__right .contact-page-content {
     padding-left: 50px;
   }
+  /* REMOVE THIS LINE TO LANDING TEXT tO SMALL IN DESKTOP */
+  .landing-content-text h1 {
+    font-size: 56px;
+    line-height: 56px;
+  }
 }
 @media screen and (min-width: 1200px) {
   .grid-list {
