@@ -54,6 +54,7 @@ function createWaveSurfer(containerId, audioFile) {
     getAudioMetaData(containerId, audioFile);
     // Set audio track total duration
     const duration = wavesurfer.getDuration();
+    const time = wavesurfer.getCurrentTime();
     getTotalTime(containerId, duration);
     updateTimeRemaining(containerId, time, duration);
   });
