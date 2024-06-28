@@ -16,6 +16,7 @@ function createWaveSurfer(containerId, audioFile) {
     height: 60,
     responsive: true,
     dragToSeek: true,
+    mediaControls: false,
     // progressColor: "orange",
     // waveColor: "#c6c6c6",
     waveColor: gradientMaker({ startColor: "#C6CDDC", endColor: "#B2B8D1" }),
@@ -24,7 +25,6 @@ function createWaveSurfer(containerId, audioFile) {
       endColor: "#ffa500",
     }),
   });
-
   // Load the audio file
   wavesurfer.load(audioFile);
 
@@ -55,6 +55,7 @@ function createWaveSurfer(containerId, audioFile) {
     // Set audio track total duration
     const duration = wavesurfer.getDuration();
     getTotalTime(containerId, duration);
+    updateTimeRemaining(containerId, time, duration);
   });
 
   // Event listener to update play/pause button text
@@ -72,6 +73,7 @@ function createWaveSurfer(containerId, audioFile) {
     const duration = wavesurfer.getDuration();
     updatePlayPauseButton(containerId, false);
     updateProgressBar(containerId, duration, 0);
+    updateTimeRemaining(containerId, 0, duration);
   });
 
   // Event listener to log errors
@@ -84,6 +86,7 @@ function createWaveSurfer(containerId, audioFile) {
     const duration = wavesurfer.getDuration();
     getCurrTime(containerId, time);
     updateProgressBar(containerId, duration, time);
+    updateTimeRemaining(containerId, time, duration);
   });
 
   // Get current time in intraction
@@ -92,6 +95,7 @@ function createWaveSurfer(containerId, audioFile) {
     const duration = wavesurfer.getDuration();
     getCurrTime(containerId, time);
     updateProgressBar(containerId, duration, time);
+    updateTimeRemaining(containerId, time, duration);
   });
 
   // Get current time in seeking
@@ -99,6 +103,7 @@ function createWaveSurfer(containerId, audioFile) {
   //   const duration = wavesurfer.getDuration();
   //   getCurrTime(containerId, time);
   //   updateProgressBar(containerId, duration, time);
+  //   updateTimeRemaining(containerId, time, duration)
   // });
 
   // Get current time in timeupdate
@@ -106,6 +111,7 @@ function createWaveSurfer(containerId, audioFile) {
     const duration = wavesurfer.getDuration();
     getCurrTime(containerId, time);
     updateProgressBar(containerId, duration, time);
+    updateTimeRemaining(containerId, time, duration);
   });
 
   return wavesurfer;
@@ -157,7 +163,7 @@ async function getAudioMetaData(containerId, file) {
 
 // Formats time as HH:MM:SS
 const formatTimecode = (seconds) => {
-  return new Date(seconds * 1000).toISOString().substr(11, 8);
+  return new Date(seconds * 1000).toISOString().slice(11, 19);
 };
 
 // get total duration
@@ -175,6 +181,25 @@ function getCurrTime(containerId, time) {
   );
 
   currentTime.innerHTML = formatTimecode(time);
+}
+
+// Update remaining time in mob ui
+function updateTimeRemaining(containerId, currentTime, duration) {
+  const timeRemaining = document.getElementById(
+    `timeRemaining__${containerId.charAt(containerId.length - 1)}`
+  );
+  var remainingTime = duration - currentTime;
+  timeRemaining.textContent = formatTime(remainingTime);
+}
+
+function formatTime(seconds) {
+  var hours = Math.floor(seconds / 3600);
+  var minutes = Math.floor((seconds % 3600) / 60);
+  var secs = Math.floor(seconds % 60);
+
+  return [hours, minutes, secs]
+    .map((unit) => String(unit).padStart(2, "0"))
+    .join(":");
 }
 
 // Function to update play/pause button text

@@ -1160,6 +1160,23 @@ ul {
   .sounds-list .sound-item .sound-control-btn.pause {
     background-color: rgba(255, 255, 255, 0.5);
   }
+
+  .timeRemaining__mob {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    bottom: 5px;
+    left: 6px;
+    z-index: 6;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--secondary-font);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
   /* skeleton sound */
 
   .sound-player__skeleton {
@@ -1294,6 +1311,10 @@ ul {
   }
   .sounds-list .sound-item-content .item-title {
     font-size: 18px;
+  }
+
+  .timeRemaining__mob {
+    display: none !important;
   }
 
   /* skeleton sound */
