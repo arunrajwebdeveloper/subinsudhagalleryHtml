@@ -162,7 +162,7 @@ ul {
   color: #000;
 }
 .main-header.header-light .header-action .btn svg path {
-  fill: #000;
+  stroke: #000;
 }
 
 .overlay {
