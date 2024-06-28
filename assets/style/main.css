@@ -161,7 +161,10 @@ ul {
 .main-header.header-light .header-logo h3 {
   color: #000;
 }
-.main-header.header-light .header-action .btn svg path {
+.main-header.header-light .header-action .btn.mail svg path {
+  fill: #000;
+}
+.main-header.header-light .header-action .btn.menu svg path {
   stroke: #000;
 }
 
