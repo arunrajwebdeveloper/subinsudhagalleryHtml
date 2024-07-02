@@ -483,9 +483,8 @@ ul {
 
 .page-wrapper {
   margin-top: 65px;
-  padding-bottom: 10px;
+  padding-bottom: 40px;
   overflow-x: hidden;
-  /* border-bottom: 20px solid #1f1f1f; */
   min-height: calc(100dvh - 66px);
 }
 
@@ -1240,7 +1239,6 @@ ul {
   }
   .page-wrapper {
     margin-top: 86px;
-    padding-bottom: 40px;
     min-height: calc(100dvh - 87px);
   }
 
