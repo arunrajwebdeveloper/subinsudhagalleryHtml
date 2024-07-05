@@ -208,13 +208,19 @@ function updatePlayPauseButton(containerId, isPlaying) {
   const button = document.getElementById(
     `playPauseButton${containerId.charAt(containerId.length - 1)}`
   );
+  const now_playing = document.getElementById(
+    `now-playing__${containerId.charAt(containerId.length - 1)}`
+  );
+
   if (button) {
     if (isPlaying) {
       button.classList.remove("play");
       button.classList.add("pause");
+      now_playing.classList.add("show");
     } else {
       button.classList.remove("pause");
       button.classList.add("play");
+      now_playing.classList.remove("show");
     }
   }
 }

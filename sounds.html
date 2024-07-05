@@ -260,10 +260,16 @@
                     </svg>
                   </div>
                   <div id="timeRemaining__${sound.id}" class="timeRemaining__mob"></div>
+                  <div id="now-playing__${sound.id}" class="now-playing">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                   </div>
+                </div>
               </div>
               <div class="sound-item-content">
                 <div class="sound-player">
+                  <div id="peak-visualizer${sound.id}" style="width: 600px;height: 50px;"></div>
                   <div id="waveform${sound.id}"></div>
                   <div class="timecode">
                     <span id="currentTime${sound.id}">00:00:00</span>
@@ -273,7 +279,7 @@
                 <div id="file-info-render${sound.id}"></div>
               </div>
             </div>
-    `;
+            `;
           soundsList.appendChild(li);
         });
       }

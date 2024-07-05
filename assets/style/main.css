@@ -987,7 +987,7 @@ ul {
   z-index: 2;
 }
 .sounds-list .sound-item .sound-control-btn:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .audio-progress-element {
   position: absolute;
@@ -1113,6 +1113,89 @@ ul {
   animation: 1.5s skeleton__animation linear infinite;
 }
 
+.now-playing {
+  display: none;
+  justify-content: space-between;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+  z-index: 7;
+}
+.now-playing.show {
+  display: flex;
+}
+.now-playing span {
+  width: 3px;
+  height: 100%;
+  background-color: orange;
+  border-radius: 3px;
+  transform-origin: bottom;
+  animation: bounce 2s ease infinite alternate;
+  content: "";
+}
+
+.now-playing span:nth-of-type(2) {
+  animation-delay: -2.2s;
+}
+
+.now-playing span:nth-of-type(3) {
+  animation-delay: -3.7s;
+}
+
+@-moz-keyframes bounce {
+  10% {
+    transform: scaleY(0.3);
+  }
+  30% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.5);
+  }
+  80% {
+    transform: scaleY(0.75);
+  }
+  100% {
+    transform: scaleY(0.6);
+  }
+}
+@-webkit-keyframes bounce {
+  10% {
+    transform: scaleY(0.3);
+  }
+  30% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.5);
+  }
+  80% {
+    transform: scaleY(0.75);
+  }
+  100% {
+    transform: scaleY(0.6);
+  }
+}
+@keyframes bounce {
+  10% {
+    transform: scaleY(0.3);
+  }
+  30% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.5);
+  }
+  80% {
+    transform: scaleY(0.75);
+  }
+  100% {
+    transform: scaleY(0.6);
+  }
+}
+
 @-moz-keyframes skeleton__animation {
   0% {
     opacity: 1;
@@ -1157,7 +1240,7 @@ ul {
     padding-left: 15px;
   }
   .sounds-list .sound-item .sound-control-btn.pause {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .timeRemaining__mob {
