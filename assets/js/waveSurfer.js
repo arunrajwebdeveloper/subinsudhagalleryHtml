@@ -8,9 +8,9 @@ const gradientMaker = ({ startColor = "#eee", endColor = "#ccc" }) => {
 };
 
 // Function to create a WaveSurfer instance and load the audio file
-function createWaveSurfer(containerId, audioFile) {
+function createWaveSurfer(elementId, audioFile) {
   var wavesurfer = WaveSurfer.create({
-    container: `#${containerId}`,
+    container: `#waveform${elementId}`,
     backend: "MediaElement", // Use MediaElement backend to ensure cross-browser compatibility
     barWidth: 2,
     height: 60,
@@ -31,7 +31,7 @@ function createWaveSurfer(containerId, audioFile) {
   // Event listener to update play/pause button text
   wavesurfer.on("loading", function (percent) {
     const sound__load__percent = document.getElementById(
-      `sound__load__percent${containerId.charAt(containerId.length - 1)}`
+      `sound__load__percent${elementId}`
     );
 
     sound__load__percent.innerText = `${percent}%`;
@@ -40,88 +40,89 @@ function createWaveSurfer(containerId, audioFile) {
   // on ready
   wavesurfer.on("ready", () => {
     const skeleton__loader = document.getElementById(
-      `sound__skeleton__${containerId.charAt(containerId.length - 1)}`
+      `sound__skeleton__${elementId}`
     );
 
     const sound__item__block = document.getElementById(
-      `sound__item__block__${containerId.charAt(containerId.length - 1)}`
+      `sound__item__block__${elementId}`
     );
 
     skeleton__loader.remove();
     sound__item__block.classList.add("visible__element");
 
     // get meta
-    getAudioMetaData(containerId, audioFile);
+    getAudioMetaData(elementId, audioFile);
     // Set audio track total duration
     const duration = wavesurfer.getDuration();
     const time = wavesurfer.getCurrentTime();
-    getTotalTime(containerId, duration);
-    updateTimeRemaining(containerId, time, duration);
+    getTotalTime(elementId, duration);
+
+    updateTimeRemaining(elementId, time, duration);
   });
 
   // Event listener to update play/pause button text
   wavesurfer.on("play", function () {
-    updatePlayPauseButton(containerId, true);
+    updatePlayPauseButton(elementId, true);
   });
 
   wavesurfer.on("pause", function () {
-    updatePlayPauseButton(containerId, false);
+    updatePlayPauseButton(elementId, false);
   });
 
   // Handle audio end event
   wavesurfer.on("finish", () => {
     wavesurfer.seekTo(0); // Seek back to the start
     const duration = wavesurfer.getDuration();
-    updatePlayPauseButton(containerId, false);
-    updateProgressBar(containerId, duration, 0);
-    updateTimeRemaining(containerId, 0, duration);
+    updatePlayPauseButton(elementId, false);
+    updateProgressBar(elementId, duration, 0);
+    updateTimeRemaining(elementId, 0, duration);
   });
 
   // Event listener to log errors
   wavesurfer.on("error", function (e) {
-    console.error(`Error loading audio for ${containerId}:`, e);
+    console.error(`Error loading audio for ${elementId}:`, e);
   });
 
   // Sets the timecode current timestamp as audio plays
   wavesurfer.on("audioprocess", (time) => {
     const duration = wavesurfer.getDuration();
-    getCurrTime(containerId, time);
-    updateProgressBar(containerId, duration, time);
-    updateTimeRemaining(containerId, time, duration);
+    getCurrTime(elementId, time);
+    updateProgressBar(elementId, duration, time);
+    updateTimeRemaining(elementId, time, duration);
   });
 
   // Get current time in intraction
   wavesurfer.on("interaction", () => {
     const time = wavesurfer.getCurrentTime();
     const duration = wavesurfer.getDuration();
-    getCurrTime(containerId, time);
-    updateProgressBar(containerId, duration, time);
-    updateTimeRemaining(containerId, time, duration);
+    getCurrTime(elementId, time);
+    updateProgressBar(elementId, duration, time);
+    updateTimeRemaining(elementId, time, duration);
   });
 
   // Get current time in seeking
   // wavesurfer.on("seeking", (time) => {
   //   const duration = wavesurfer.getDuration();
-  //   getCurrTime(containerId, time);
-  //   updateProgressBar(containerId, duration, time);
-  //   updateTimeRemaining(containerId, time, duration)
+  //   getCurrTime(elementId, time);
+  //   updateProgressBar(elementId, duration, time);
+  //   updateTimeRemaining(elementId, time, duration)
   // });
 
   // Get current time in timeupdate
   wavesurfer.on("timeupdate", (time) => {
     const duration = wavesurfer.getDuration();
-    getCurrTime(containerId, time);
-    updateProgressBar(containerId, duration, time);
-    updateTimeRemaining(containerId, time, duration);
+    getCurrTime(elementId, time);
+    updateProgressBar(elementId, duration, time);
+    updateTimeRemaining(elementId, time, duration);
   });
 
   return wavesurfer;
 }
 
 // Update progress svg
-function updateProgressBar(containerId, duration, currentTime) {
+function updateProgressBar(elementId, duration, currentTime) {
   const progress_circle_svg = document.getElementById(
-    `progress-circle-svg__${containerId.charAt(containerId.length - 1)}`
+    `progress-circle-svg__${elementId}`
   );
 
   const progress = (currentTime / duration) * 224.82;
@@ -146,11 +147,9 @@ const fileTypeColors = (type) => {
 };
 
 // GET AUDIO META DATA
-async function getAudioMetaData(containerId, file) {
+async function getAudioMetaData(elementId, file) {
   const meta = await audioMetaData(file);
-  const metadata = document.getElementById(
-    `file-info-render${containerId.charAt(containerId.length - 1)}`
-  );
+  const metadata = document.getElementById(`file-info-render${elementId}`);
   metadata.innerHTML = `
     <h2 class="item-title">${meta?.fileName}</h2>
     <span class="item-subtext">
@@ -168,27 +167,21 @@ const formatTimecode = (seconds) => {
 };
 
 // get total duration
-function getTotalTime(containerId, duration) {
-  const totalDuration = document.getElementById(
-    `totalDuration${containerId.charAt(containerId.length - 1)}`
-  );
+function getTotalTime(elementId, duration) {
+  const totalDuration = document.getElementById(`totalDuration${elementId}`);
   totalDuration.innerHTML = formatTimecode(duration);
 }
 
 // get current time
-function getCurrTime(containerId, time) {
-  const currentTime = document.getElementById(
-    `currentTime${containerId.charAt(containerId.length - 1)}`
-  );
+function getCurrTime(elementId, time) {
+  const currentTime = document.getElementById(`currentTime${elementId}`);
 
   currentTime.innerHTML = formatTimecode(time);
 }
 
 // Update remaining time in mob ui
-function updateTimeRemaining(containerId, currentTime, duration) {
-  const timeRemaining = document.getElementById(
-    `timeRemaining__${containerId.charAt(containerId.length - 1)}`
-  );
+function updateTimeRemaining(elementId, currentTime, duration) {
+  const timeRemaining = document.getElementById(`timeRemaining__${elementId}`);
   var remainingTime = duration - currentTime;
   timeRemaining.textContent = formatTime(remainingTime);
 }
@@ -204,13 +197,9 @@ function formatTime(seconds) {
 }
 
 // Function to update play/pause button text
-function updatePlayPauseButton(containerId, isPlaying) {
-  const button = document.getElementById(
-    `playPauseButton${containerId.charAt(containerId.length - 1)}`
-  );
-  const now_playing = document.getElementById(
-    `now-playing__${containerId.charAt(containerId.length - 1)}`
-  );
+function updatePlayPauseButton(elementId, isPlaying) {
+  const button = document.getElementById(`playPauseButton${elementId}`);
+  const now_playing = document.getElementById(`now-playing__${elementId}`);
 
   if (button) {
     if (isPlaying) {

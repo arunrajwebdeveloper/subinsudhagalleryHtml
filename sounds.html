@@ -293,8 +293,8 @@
 
         soundData.forEach((sound) => {
           waveforms[`waveform${sound.id}`] = createWaveSurfer(
-            `waveform${sound.id}`,
-            sound.audioFile
+            sound?.id,
+            sound?.audioFile
           );
         });
 
