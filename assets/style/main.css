@@ -958,6 +958,24 @@ ul {
   background-color: #1cc49f !important;
 }
 
+a.download-link {
+  background-color: #26b821;
+  color: #fff;
+  font-weight: 400;
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 4px;
+  outline: 0;
+  border: 0;
+  transition: 0.3s ease;
+}
+a.download-link:hover {
+  background-color: #48a14b;
+}
+a.download-link > svg {
+  margin-right: 2px;
+}
+
 .sounds-list .sound-item .controls {
   position: absolute;
   left: 50%;

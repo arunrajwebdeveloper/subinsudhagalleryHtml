@@ -8,7 +8,7 @@ const gradientMaker = ({ startColor = "#eee", endColor = "#ccc" }) => {
 };
 
 // Function to create a WaveSurfer instance and load the audio file
-function createWaveSurfer(elementId, audioFile) {
+function createWaveSurfer(elementId, audioFile, isDownloadable = false) {
   var wavesurfer = WaveSurfer.create({
     container: `#waveform${elementId}`,
     backend: "MediaElement", // Use MediaElement backend to ensure cross-browser compatibility
@@ -33,7 +33,6 @@ function createWaveSurfer(elementId, audioFile) {
     const sound__load__percent = document.getElementById(
       `sound__load__percent${elementId}`
     );
-
     sound__load__percent.innerText = `${percent}%`;
   });
 
@@ -51,7 +50,7 @@ function createWaveSurfer(elementId, audioFile) {
     sound__item__block.classList.add("visible__element");
 
     // get meta
-    getAudioMetaData(elementId, audioFile);
+    getAudioMetaData(elementId, audioFile, isDownloadable);
     // Set audio track total duration
     const duration = wavesurfer.getDuration();
     const time = wavesurfer.getCurrentTime();
@@ -147,7 +146,7 @@ const fileTypeColors = (type) => {
 };
 
 // GET AUDIO META DATA
-async function getAudioMetaData(elementId, file) {
+async function getAudioMetaData(elementId, file, isDownloadable) {
   const meta = await audioMetaData(file);
   const metadata = document.getElementById(`file-info-render${elementId}`);
   metadata.innerHTML = `
@@ -158,6 +157,23 @@ async function getAudioMetaData(elementId, file) {
       ${meta?.bitrate ? `<em>${meta?.bitrate}Kbps</em>` : ""}
       <em>${meta?.fileSizeInMB}MB</em>
       ${meta?.channels ? `<em>CH ${meta?.channels}</em>` : ""}
+      ${
+        isDownloadable
+          ? `<a class="download-link" href="${file}" download>
+            <svg width="12px" height="12px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g>
+                  <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="24" height="24"></rect>
+                  <line x1="12" y1="14" x2="12" y2="20" id="Path" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></line>
+                  <path d="M15,19 L12.7071,21.2929 C12.3166,21.6834 11.6834,21.6834 11.2929,21.2929 L9,19" id="Path" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+                  <path d="M19.9495,16 C20.5978,15.3647 21,14.4793 21,13.5 C21,11.567 19.433,10 17.5,10 C17.3078,10 17.1192,10.0155 16.9354,10.0453 C16.4698,6.63095 13.5422,4 10,4 C6.13401,4 3,7.13401 3,11 C3,12.9587 3.80447,14.7295 5.10102,16" id="Path" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+                </g>
+              </g>
+            </svg>
+            <span>Download</span>
+          </a>`
+          : ""
+      }
     </span>`;
 }
 

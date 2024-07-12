@@ -178,46 +178,55 @@
           id: 7,
           imageSrc: "./assets/images/music-thumb-6.jpg",
           audioFile: `./assets/sounds/mixkit-be-happy-942.wav`,
+          allowDownload: true,
         },
         {
           id: 8,
           imageSrc: "./assets/images/music-thumb-7.jpg",
           audioFile: `./assets/sounds/muzica-pentru-film-cinematic-9014.aac`,
+          allowDownload: false,
         },
         {
           id: 1,
           imageSrc: "./assets/images/music-thumb.jpg",
           audioFile: `./assets/sounds/mixkit-gimme-that-groove-872.mp3`,
+          allowDownload: true,
         },
         {
           id: 2,
           imageSrc: "./assets/images/music-thumb-1.jpg",
           audioFile: `./assets/sounds/mixkit-happy-and-all-that-514.m4a`,
+          allowDownload: true,
         },
         {
           id: 3,
           imageSrc: "./assets/images/music-thumb-2.jpg",
           audioFile: `./assets/sounds/mixkit-babe-783.mp3`,
+          allowDownload: false,
         },
         {
           id: 4,
           imageSrc: "./assets/images/music-thumb-3.jpg",
           audioFile: `./assets/sounds/mixkit-epic-games-76.mp3`,
+          allowDownload: false,
         },
         {
           id: 5,
           imageSrc: "./assets/images/music-thumb-4.jpg",
           audioFile: `./assets/sounds/mixkit-hip-hop-03-739.mp3`,
+          allowDownload: true,
         },
         {
           id: 6,
           imageSrc: "./assets/images/music-thumb-5.jpg",
           audioFile: `./assets/sounds/mixkit-smooth-jazz-640.mp3`,
+          allowDownload: false,
         },
         {
           id: 9,
           imageSrc: "./assets/images/music-thumb-2.jpg",
           audioFile: `./assets/sounds/smooth-play-back-aac-file-sample-1.aac`,
+          allowDownload: false,
         },
       ];
 
@@ -293,7 +302,8 @@
         soundData.forEach((sound) => {
           waveforms[`waveform${sound.id}`] = createWaveSurfer(
             sound?.id,
-            sound?.audioFile
+            sound?.audioFile,
+            sound?.allowDownload
           );
         });
 
